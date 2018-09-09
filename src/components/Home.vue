@@ -25,19 +25,15 @@
     </div>
 </template>
 <script>
-  import { fetchSurveys } from '@/api'
-  export default {  
-  data() {
-    return {
-      surveys: []
+  import { mapState } from 'vuex'
+  export default {
+    computed: mapState({
+      surveys: state => state.surveys
+    }),
+    beforeMount() {
+      this.$store.dispatch('loadSurveys')
     }
-  },
-  beforeMount() {
-    fetchSurveys().then(response => {
-      this.surveys = response
-    })
   }
-}
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped="">
